@@ -19,7 +19,6 @@ const rrfConfig = {
     userProfile: 'users',
     useFirestoreForProfile: true
 }
-
 const store = createStore(rootReducer, 
     compose(
         applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
