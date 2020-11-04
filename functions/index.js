@@ -24,4 +24,19 @@ exports.projectCreated = functions.firestore
             time: admin.firestore.FieldValue.serverTimestamp() 
         };
     return createNotification(notification);
-})
+});
+
+exports.newUserJoin = functions.firestore
+    .document('users/{userID}')
+    .onCreate((snap, context) => {
+        const user = snap.data();
+        const displayName = `${user.firstname} ${user.lastname}`;   
+        console.log(user, 'user');
+        
+        const noftification = {
+            content: 'New user join our party',
+            user: displayName ,
+            time: admin.firestore.FieldValue.serverTimestamp()
+        }
+    return createNotification(noftification);
+});
